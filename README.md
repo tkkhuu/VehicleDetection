@@ -1,6 +1,10 @@
 # Vehicle Detection
 This project builds a computer vision pipeline to detect and track vehicles driving on the highway.
 
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=AlVHfmVhhO8
+" target="_blank"><img src="http://img.youtube.com/vi/AlVHfmVhhO8/0.jpg" 
+alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
+
 ## Data
 The pipeline trains the classifier on car images (looking from behind) and non-car images. These are set of 64x64 images provided by the KITTI and GTI dataset. There were 8792 car images and 8968 non car images. I used 80% for training and the other 20% for testing.
 
@@ -71,11 +75,11 @@ In order to get rid of noisy classification, I implemented a simple low pass fil
 
 
 # Discussion
-The described pipeline worked but is very inefficient, it would not be able to perform well in real time. 
+The described pipeline worked but is very inefficient, it would not be able to perform well in real time. My pipeline also failed to detect when the cars enter the brighter road. FOr future improvements, I would try different classifiers with different parameters to increase accuracy.
 
-[car_image]: https://raw.github.com/tkkhuu/VehicleDetection/master/readme_img/car_image.png "Car Image"
-[noncar_image]: https://raw.github.com/tkkhuu/VehicleDetection/master/readme_img/noncar_image.png "Non Car Image"
-[hog_viz]: https://raw.github.com/tkkhuu/VehicleDetection/master/readme_img/hog_viz.png "Visualizing HOG"
+[car_image]: https://raw.github.com/tkkhuu/VehicleDetection/master/readme_img/car_image.PNG "Car Image"
+[noncar_image]: https://raw.github.com/tkkhuu/VehicleDetection/master/readme_img/noncar_image.PNG "Non Car Image"
+[hog_viz]: https://raw.github.com/tkkhuu/VehicleDetection/master/readme_img/hog_viz.PNG "Visualizing HOG"
 [final_hog_config]: https://raw.github.com/tkkhuu/VehicleDetection/master/readme_img/final_hog_config.png "Final HOG Config"
 [color_hist]: https://raw.github.com/tkkhuu/VehicleDetection/master/readme_img/color_hist.png "Color Histogram"
 [sliding_window]: https://raw.github.com/tkkhuu/VehicleDetection/master/readme_img/sliding_window.png "Sliding Window"
