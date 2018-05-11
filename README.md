@@ -45,27 +45,33 @@ I experiemented on a different combinations of parameters, the ranges I picked f
 | 23            | YUV         | 11                    | 16              | 2              | ALL     |
 | 24            | YCrCb       | 11                    | 16              | 2              | ALL     |
 
-The combination that I found the most accurate in classifying test images as well as detecting in a scenario was configuration 17.
+The combination that I found the most accurate in classifying test images as well as detecting in a scenario was configuration 24.
 In the visualization, this configuration seems to sketch out the shape of a car and distinguish other noncar features.
 
-![alt text][final_hog_config]
 
 ### Color Features
 
-Cars have their own unique colors, therefore, in addition to HOG features, I created a histogram of values for each color channel and used it as a features in training.
+Cars have their own unique colors, therefore, in addition to HOG features, I created a histogram of values for each color channel and used it as a features in training. Using the same tuning approach as HOG features, I used the RGB channels for training with 32 bins.
 
-![alt text][color_hist]
 
 ### Spatial Features
-Another feature that might add some uniqueness to car images that I experimented was spatial features. This techniques basically resize the image, vectorize the image matrix and use that vector as a feature for training. The size I used was 32x32.
+Another feature that might add some uniqueness to car images that I experimented was spatial features. This techniques basically resize the image, vectorize the image matrix and use that vector as a feature for training. The size I used was 16x16 on YUV channels.
 
 ## Training
 I used SVM as the classifier for detection. The features (HOG, histogram of colors, spatial) were extracted and organized into a vector for each image. These features were then normalized and fed into the classifier for training.
 
 ## Sliding Window Search
 The window sliding technique was used to search for cars in an images. I searched only on the lower half of the image since this is where the road and the cars are. Taking advantage of the fact that the car size depends on where it is on the road, I created various scaled windows and searched with smaller windows on pixels closer to the middle in the y direction and larger windows on lower y-pixels.
+To determine the scale of the rectangle, I first search with the rectangle of scale one and observe the size of the car that the area picked up. Then I adjusted the lower and larger scale based on the size of scale 1.
 
-![alt text][sliding_window]
+
+## Low Pass Filter
+
+In order to get rid of noisy classification, I implemented a simple low pass filter where n consecutive frames are added and then divided by n. This improved accuracy and eliminated noises.
+
+
+# Discussion
+The described pipeline worked but is very inefficient, it would not be able to perform well in real time. 
 
 [car_image]: https://raw.github.com/tkkhuu/VehicleDetection/master/readme_img/car_image.png "Car Image"
 [noncar_image]: https://raw.github.com/tkkhuu/VehicleDetection/master/readme_img/noncar_image.png "Non Car Image"
